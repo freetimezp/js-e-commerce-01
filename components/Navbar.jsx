@@ -8,7 +8,7 @@ const Navbar = () => {
         <div className="navbar-container">
             <p className="logo">
                 <Link href="/">
-                    ECom Headphones
+                    E-Com Headphones
                 </Link>
             </p>
             <button type="button" className="cart-icon" onClick="">
