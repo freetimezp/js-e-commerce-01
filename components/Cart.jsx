@@ -10,7 +10,7 @@ import {TiDeleteOutline} from "react-icons/ti";
 
 const Cart = () => {
     const cartRef = useRef();
-    const {totalPrice, totalQuantities, cartItems, setShowCart} = useStateContext();
+    const {totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity} = useStateContext();
 
     return (
         <div className="cart-wrapper" ref={cartRef}>
@@ -34,7 +34,11 @@ const Cart = () => {
                 )}
 
                 <div className="product-container">
-                    {cartItems.length >= 1 && cartItems.map((item) => (
+                    {cartItems.length >= 1 && cartItems.sort(function (a, b) {
+                        if(a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+                        if(a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+                        return 0;
+                    }).map((item) => (
                         <div className="product" key={item._id}>
                             <img src={urlFor(item?.image[0])} className="cart-product-image" alt="product"/>
                             <div className="item-desc">
@@ -45,11 +49,15 @@ const Cart = () => {
                                 <div className="flex bottom">
                                     <div>
                                         <p className="quantity-desc">
-                                            <span className="minus" onClick="">
+                                            <span className="minus" onClick={() => {
+                                                toggleCartItemQuantity(item._id, 'dec');
+                                            }}>
                                                 <AiOutlineMinus />
                                             </span>
-                                            <span className="num" onClick="">0</span>
-                                            <span className="plus" onClick="">
+                                            <span className="num">{item.quantity}</span>
+                                            <span className="plus" onClick={() => {
+                                                toggleCartItemQuantity(item._id, 'inc');
+                                            }}>
                                                 <AiOutlinePlus />
                                             </span>
                                         </p>
