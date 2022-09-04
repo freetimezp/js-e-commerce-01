@@ -10,7 +10,7 @@ import {TiDeleteOutline} from "react-icons/ti";
 
 const Cart = () => {
     const cartRef = useRef();
-    const {totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity} = useStateContext();
+    const {totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove} = useStateContext();
 
     return (
         <div className="cart-wrapper" ref={cartRef}>
@@ -62,7 +62,7 @@ const Cart = () => {
                                             </span>
                                         </p>
                                     </div>
-                                    <button type="button" onClick="" className="remove-item">
+                                    <button type="button" onClick={() => onRemove(item)} className="remove-item">
                                         <TiDeleteOutline />
                                     </button>
                                 </div>
