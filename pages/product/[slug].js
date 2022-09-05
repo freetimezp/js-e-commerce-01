@@ -8,7 +8,12 @@ import {AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar} from "react-ic
 const ProductDetails = ({products, product}) => {
     const {image, name, details, price} = product;
     const [index, setIndex] = useState(0);
-    const {incQty, decQty, qty, onAdd} = useStateContext();
+    const {incQty, decQty, qty, onAdd, setShowCart} = useStateContext();
+
+    const handleBuyNow = () => {
+        onAdd(product, qty);
+        setShowCart(true);
+    }
 
     return (
         <div>
@@ -53,7 +58,7 @@ const ProductDetails = ({products, product}) => {
                             <span className="minus" onClick={decQty}>
                                 <AiOutlineMinus />
                             </span>
-                            <span className="num" onClick="">{qty}</span>
+                            <span className="num">{qty}</span>
                             <span className="plus" onClick={incQty}>
                                 <AiOutlinePlus />
                             </span>
@@ -62,7 +67,7 @@ const ProductDetails = ({products, product}) => {
 
                     <div className="buttons">
                         <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>Add to Cart</button>
-                        <button type="button" className="buy-now" onClick={console.log('slug')}>Buy now</button>
+                        <button type="button" className="buy-now" onClick={handleBuyNow}>Buy now</button>
                     </div>
                 </div>
             </div>
@@ -72,8 +77,8 @@ const ProductDetails = ({products, product}) => {
                 <div className="marquee">
                     <div className="maylike-products-container track">
                         {
-                            products?.map((item) => (
-                                <Product index={product._id} product={item}  />
+                            products?.map((item, i) => (
+                                <Product key={i} index={product._id} product={item}  />
                             ))
                         }
                     </div>
