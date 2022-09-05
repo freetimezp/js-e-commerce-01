@@ -22,7 +22,7 @@ const ProductDetails = ({products, product}) => {
                     <div className="small-images-container">
                         {
                             image?.map((item, i) => (
-                                <img src={urlFor(item)} alt="product"
+                                <img src={urlFor(item)} alt="product" key={i}
                                      className={i === index ? "small-image selected-image" : "small-image"}
                                      onMouseEnter={() => setIndex(i)}
                                 />
@@ -62,7 +62,7 @@ const ProductDetails = ({products, product}) => {
 
                     <div className="buttons">
                         <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>Add to Cart</button>
-                        <button type="button" className="buy-now" onClick="">Buy now</button>
+                        <button type="button" className="buy-now" onClick={console.log('slug')}>Buy now</button>
                     </div>
                 </div>
             </div>
